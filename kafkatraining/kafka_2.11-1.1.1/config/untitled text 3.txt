@@ -1,0 +1,145 @@
+> .inwindowszookeeper-server-start.bat  .configzookeeper.properties
+
+> .inwindowskafka-server-start.bat .configserver.properties
+
+create topic 
+> .inwindowskafka-topics.bat --create --zookeeper localhost:2181 --topic topicA --partitions 3 --replication-factor 1
+
+producer on cli 
+> .inwindowskafka-console-producer.bat --broker-list localhost:9092 --topic topicA
+
+consumer cli
+> .inwindowskafka-console-consumer.bat --bootstrap-server localhost:9092 --topic topicA
+
+
+
+package com.training;
+
+import java.util.Properties;
+
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.StringSerializer;
+
+/**
+ * http://kafka.apache.org/documentation/
+ * @author Naveen
+ *
+ */
+public class KafkaProducerClient {
+	public static void main(String[] args) {
+		// set all the properties
+		// the details can be kept in flat file or 
+		// properties class 
+		
+		Properties properties = new Properties(); 
+		
+		// identify the kafka server details 
+		properties.setProperty("bootstrap.servers", 
+				"localhost:9092");
+		
+		properties.setProperty("key.serializer", 
+				StringSerializer.class.getName());
+		
+		properties.setProperty("value.serializer", 
+				StringSerializer.class.getName()); 
+		
+		// for ack, retries etc etc 
+		// when producer sends we can ask for ack 
+		properties.setProperty("acks", "1"); 
+		properties.setProperty("retries", "3"); 
+
+		Producer<String, String> producer = 
+				new KafkaProducer<String, String>(properties); 
+		
+		for(int i=0; i<30; i++) {
+		ProducerRecord<String, String> producerRecord = 
+					new ProducerRecord<String, String>
+				("topicA", "1",
+					"Testing message from Java No : " + i); 
+		
+		System.out.println("Message Sent  " +  i );
+		
+		producer.send(producerRecord);
+		}
+		
+		producer.flush(); 
+		
+		producer.close(); 
+		// close the connection 
+		
+		System.out.println("Message Sent... ");
+	}
+}
+
+------------------------------
+package com.training;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Properties;
+
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.serialization.StringDeserializer;
+
+
+public class KafkaConsumerClient {
+	public static void main(String[] args) {
+		Properties properties = new Properties();
+
+		// identify the kafka server details
+		properties.setProperty("bootstrap.servers", 
+				"localhost:9092");
+
+		properties.setProperty("key.deserializer", 
+				StringDeserializer.class.getName());
+
+		properties.setProperty("value.deserializer", 
+				StringDeserializer.class.getName());
+
+		properties.setProperty("group.id", "FirstGroup"); 
+		
+		properties.setProperty("session.timeout.ms", "30000"); 
+		properties.setProperty("auto.offset.reset", "earliest"); 
+		
+		
+		KafkaConsumer<String, String> 
+			kafkaConsumer = new KafkaConsumer
+				<String, String>(properties);
+		
+
+		kafkaConsumer.subscribe(Arrays.asList("topicA"));
+		
+		while(true) {
+			
+			ConsumerRecords<String, String> 
+				consumerRecords = kafkaConsumer.poll(1000); 
+			
+			System.out.println("Count Number of Messages Got " + 
+					consumerRecords.count());	
+			
+			for(ConsumerRecord<String, String> temp : 
+					consumerRecords) {
+				
+				System.out.println(
+					"Key: " + temp.key() + 
+					", Value: " + temp.value() +
+					", Partition: " + temp.partition() +
+					", Topic " + temp.topic() +
+					", Time :" + new Date(temp.timestamp())
+						);
+				
+			}
+			
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+}

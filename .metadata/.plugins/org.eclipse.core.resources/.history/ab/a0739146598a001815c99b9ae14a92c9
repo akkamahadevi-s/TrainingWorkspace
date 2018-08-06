@@ -1,0 +1,24 @@
+package com.trainings.profile;
+
+import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+
+//Pro-MySQL
+
+@Configuration
+@Profile("Development")
+public class ProdDatabaseConfig implements DatabaseConfig{
+
+	public DataSource createDataSource() {
+		
+	DriverManagerDataSource dataSource = new DriverManagerDataSource();
+	System.out.println("Creating Production Database Instance");
+		return dataSource;
+	}
+	
+
+}

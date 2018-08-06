@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="SpringWorks2"/>
+<aop-project name="TicketBooking"/>
+<aop-project name="spring-mvc-airline-reservation"/>
+<aop-project name="restful-works"/>
+</aop-reference-model>

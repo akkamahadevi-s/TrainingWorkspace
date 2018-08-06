@@ -1,0 +1,10 @@
+package com.training.repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.mongo.model.Customer;
+
+public interface CustomerMongoRepository extends MongoRepository<Customer, String>{
+	
+
+}

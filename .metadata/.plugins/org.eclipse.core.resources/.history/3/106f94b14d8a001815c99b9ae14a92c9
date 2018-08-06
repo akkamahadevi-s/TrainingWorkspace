@@ -1,0 +1,34 @@
+package com.trainings.messagesource;
+
+public class HelloWorld {
+	private String greeting;
+	private String message;
+	
+	//you can have message resource entry made in .xml file and you can do auto wire or do below
+	private MessageSource messagesource;
+	public void sayHelloWorld() {
+		System.out.println("messageSource.getMessage",arg0,arg1);
+	}
+
+	public String getGreeting() {
+		return greeting;
+	}
+
+	@Override
+	public String toString() {
+		return "HelloWorld [greeting=" + greeting + ", message=" + message + "]";
+	}
+
+	public void setGreeting(String greeting) {
+		this.greeting = greeting;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+}

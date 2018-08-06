@@ -1,0 +1,13 @@
+package com.training.collectins;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Client {
+	public static void main(String[] args) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("collection-context.xml");
+		
+		myCollection collection = context.getBean("myCollection", MyCollection.class);
+	}
+
+}

@@ -1,0 +1,14 @@
+package com.training.repository;
+
+import java.util.List;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.mongo.model.Contact;
+import com.mongo.model.Customer;
+
+public interface CustomerMongoRepository extends MongoRepository<Contact, String>{
+	
+	List<Contact> findByName(String name);
+
+}

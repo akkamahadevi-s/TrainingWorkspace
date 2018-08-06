@@ -1,0 +1,28 @@
+package com.training;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+
+public class StoreEmployeeRecord {
+	public static void main(String[] args) {
+MongoClient mongoClient = new MongoClient("localhost",27020);
+		
+		DB db = mongoClient.getDB("exdb");
+		DBCollection dbc = db.getCollection("emps");
+		
+		//first way
+		DBObject object = new BasicDBObject();
+		object.put("empid",301);
+		object.put("empname","kavita");
+		object.put("empemail","kavita@gmail.com");
+		
+		dbc.save(object);
+		
+		System.out.println("Object Saved");
+		
+	}
+
+}

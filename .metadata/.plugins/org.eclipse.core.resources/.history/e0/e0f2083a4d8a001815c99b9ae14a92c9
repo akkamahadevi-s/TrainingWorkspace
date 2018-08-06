@@ -1,0 +1,10 @@
+package com.trainings.messagesource;
+
+public class HelloWorld {
+	private String greeting;
+	private String message;
+	
+	//you can have message resource entry made in .xml file and you can do auto wire or do below
+	
+
+}

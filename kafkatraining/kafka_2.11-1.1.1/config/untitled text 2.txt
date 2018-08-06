@@ -1,0 +1,2 @@
+Description	Resource	Path	Location	Type Archive for required library: '/Users/akkamahadevi/.m2/repository/org/apache/kafka/kafka_2.12/1.1.1/kafka_2.12-1.1.1.jar' in project 'KafkaWorks' 
+ be read or is not a valid ZIP file	KafkaWorks		Build path	Build Path Problem

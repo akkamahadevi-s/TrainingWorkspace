@@ -1,0 +1,30 @@
+package com.trining.aop.service;
+
+import com.training.aop.model.CAAccount;
+import com.training.aop.model.SBAccount;
+
+public class BankingService {
+	private SBAccount sbAccount;
+	private CAAccount caAccount;
+	@Override
+	public String toString() {
+		return "BankingService [sbAccount=" + sbAccount + ", caAccount=" + caAccount + "]";
+	}
+	public SBAccount getSbAccount() {
+		return sbAccount;
+	}
+	public void setSbAccount(SBAccount sbAccount) {
+		this.sbAccount = sbAccount;
+	}
+	public CAAccount getCaAccount() {
+		return caAccount;
+	}
+	public void setCaAccount(CAAccount caAccount) {
+		this.caAccount = caAccount;
+	}
+	
+	public String setAndGet(String name) {
+		return "Mr/Ms/Mrs" +name;
+	}
+
+}

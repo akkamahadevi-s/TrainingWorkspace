@@ -1,0 +1,7 @@
+package com.training.aop.model;
+
+public class CAAccount {
+	private Account account;
+	
+
+}

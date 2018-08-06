@@ -1,0 +1,7 @@
+package com.trainings.profile;
+
+//this can even done by xml
+@Configuration
+public class AppConfig {
+
+}

@@ -1,0 +1,28 @@
+package com.training.autowire;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+import com.training.helloi18n.GreetEnglish;
+import com.training.helloi18n.GreetFrench;
+import com.training.helloi18n.Greeting;
+
+@Component
+public class AppConfig {
+	
+	@Bean(name="camera")
+	public Greeting getCamera() {
+		return new Camera();
+	}
+	
+	@Bean(name="screen")
+	public Greeting getScreen() {
+		return new GreetFrench();
+	}
+	
+	@Bean(name="speaker")
+	public Greeting getSpeakers() {
+		return new GreetFrench();
+	}
+
+}

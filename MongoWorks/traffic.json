@@ -1,0 +1,5 @@
+{"_id":{"$oid":"5b5ac2f04e087cab06f05b7f"},"empid":101.0,"empname":"samas","empemail":"samas@gmail.com"}
+{"_id":{"$oid":"5b5ac35a4e087cab06f05b80"},"empid":102.0,"empname":"subha@gmail.com"}
+{"_id":{"$oid":"5b5ac787e818c8d8048fcd91"},"empid":105,"empname":"munaf","empemail":"munaf@gmail.com"}
+{"_id":{"$oid":"5b5ac787e818c8d8048fcd92"},"empid":104,"empname":"pooja","empemail":"pooja@gmail.com"}
+{"_id":{"$oid":"5b5ac787e818c8d8048fcd93"},"empid":103,"empname":"Akkamahadevi","empemail":"akkamahadevi@gmail.com"}

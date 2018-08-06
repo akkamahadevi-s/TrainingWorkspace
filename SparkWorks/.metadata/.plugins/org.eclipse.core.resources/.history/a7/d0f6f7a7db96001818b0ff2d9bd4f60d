@@ -1,0 +1,23 @@
+package com.training.sparkworks;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
+
+import com.training.commons.SparkConnection;
+
+public class SparkSQLDemo {
+	public static void main(String[] args) {
+		Logger.getLogger("org").setLevel(Level.ERROR);
+		//optional
+		Logger.getLogger("akka").setLevel(Level.ERROR);
+		
+		JavaSparkContext sparkContext = SparkConnection.getContext();
+		SparkSession spSession = SparkConnection.getSession();
+		Dataset<Row> empDatafields = spSession.read().json("./data/customerData.json");
+	}
+
+}

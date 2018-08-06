@@ -1,0 +1,9 @@
+package com.training.exilant.restfulworks.execption;
+
+public class UserNotFoundException extends RuntimeException{
+	
+	public UserNotFoundException() {
+		super():
+	}
+
+}

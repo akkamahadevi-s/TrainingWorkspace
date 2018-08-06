@@ -1,0 +1,77 @@
+package com.training.sparkworks;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
+import static org.apache.spark.sql.functions.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.training.commons.SparkConnection;
+
+public class SparkSQLDemo {
+	public static void main(String[] args) {
+		Logger.getLogger("org").setLevel(Level.ERROR);
+		//optional
+		Logger.getLogger("akka").setLevel(Level.ERROR);
+		
+		JavaSparkContext sparkContext = SparkConnection.getContext();
+		SparkSession spSession = SparkConnection.getSession();
+		Dataset<Row> empDatafields = spSession.read().json("./data/customerData.json");
+		empDatafields.show();
+		empDatafields.printSchema();
+		
+		//data queries
+		System.out.println("SELECT Demo");
+		empDatafields.select(col("name"),col("salary")).show();
+		
+		//data queries on selection(condition)
+		System.out.println("Select Demo with Condition");
+		empDatafields.filter(col("gender").equalTo("male")).show();
+		
+		//aggregate
+		System.out.println("Aggregate-group by gender");
+		empDatafields.groupBy(col("gender")).count().show();
+		
+		//group by dept id ,average salary and max age
+		Dataset<Row> summaryData = empDatafields.groupBy(col("deptid"))
+				.agg(avg(empDatafields.col("salary")),max(col("age")));
+		
+		summaryData.show();
+		
+		//---------try with bean classes---
+		Department dept1 = new Department(100,"Development");
+		Department dept2 = new Department(200,"Testing");
+		List<Department> deptList = new ArrayList<Department>();
+		deptList.add(dept1);
+		deptList.add(dept2);
+		
+		Dataset<Row> deptDataFields = spSession.createDataFrame(deptList,Department.class);
+		
+		System.out.println("Department Contents are");
+		deptDataFields.show();
+		
+		System.out.println("Join Employee with Dept");
+		Dataset<Row> empDeptJoin = empDatafields.join(deptDataFields,col("deptid").equalTo(col("departmentId")));
+		empDeptJoin.show();
+		
+		System.out.println("-----------Join with Aggregation------");
+		empDatafields.filter(col("age").gt(30))
+		.join(deptDataFields,col("deptid")
+		.equalTo(col("departmentId"))).groupBy(col("deptid"))
+		.agg( 
+				avg(empDatafields.col("salary")),
+				max(empDatafields.col("age"))
+				).show();
+		
+		//loading from csv
+		Dataset<Row> autoData = spSession.read().csv("./data/auto-data.json");
+		
+		
+	}
+
+}

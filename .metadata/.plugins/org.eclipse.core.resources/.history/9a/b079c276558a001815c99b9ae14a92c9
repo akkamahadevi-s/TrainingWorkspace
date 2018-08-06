@@ -1,0 +1,13 @@
+package com.trainings.profile;
+
+import javax.sql.DataSource;
+
+public class DevDatabaseConfig implements DatabaseConfig{
+
+	public DataSource createDataSource() {
+		
+		return null;
+	}
+	
+
+}

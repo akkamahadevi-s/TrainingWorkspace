@@ -1,0 +1,12 @@
+package com.training.sparkworks;
+
+public class ReadMovieTweets {
+
+	public static void main(String[] args) {
+		String appName = "sampleApp";
+		//as of now we have got two instances of spark or this can be got from remote instance
+		String sparkMaster = "local[2]";
+
+	}
+
+}

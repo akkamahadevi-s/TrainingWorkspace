@@ -1,0 +1,26 @@
+package com.training.sparkworks;
+
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
+
+public class ReadMovieTweets {
+
+	public static void main(String[] args) {
+		String appName = "sampleApp";
+		//as of now we have got two instances of spark or this can be got from remote instance
+		
+		String sparkMaster = "local[2]";
+		JavaSparkContext spContext = null;
+		SparkConf conf = new SparkConf().setAppName(appName).setMaster(sparkMaster);
+		
+		//creating spark context configuration
+		spContext = new JavaSparkContext(conf);
+		
+		//read the file into RDD
+		JavaRDD<String> tweetsRDD = spContext.textFile("/data/movietweets.csv.xlsx");
+		tweetsRDD.take(5).forEach(System.out::println);;
+		
+		}
+
+}

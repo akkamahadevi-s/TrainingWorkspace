@@ -1,0 +1,13 @@
+package com.training;
+
+import com.mongodb.MongoClient;
+
+public class GetMetaData {
+	public static void main(String[] args) {
+		//localhost port:27020
+		MongoClient mongoClient = new MongoClient("localhost",27020);
+		
+		System.out.println("Connection got to "+mongoClient);
+	}
+
+}

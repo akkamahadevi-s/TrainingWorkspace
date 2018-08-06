@@ -1,0 +1,12 @@
+package com.training.interfaces;
+
+public interface IEmployeeDAO {
+	
+	//CRUD Operation
+	
+	public Employee getEmployee(int empId);
+	public List<Employee> getAllEmps();
+	public void insertEmployee(Employee employee);
+	public void deleteEmployee(int empId);
+
+}
